@@ -1,0 +1,122 @@
+{include file="public/header" /}
+<article>
+  <div class="shutter">
+    <div class="shutter-img">
+      <a href="#" data-shutter-title="Iron Man">
+        <img src="__PUBLIC__/index/picture/shutter_1.jpg" alt="#">
+      </a>
+      <a href="#" data-shutter-title="Super Man">
+        <img src="__PUBLIC__/index/picture/shutter_2.jpg" alt="#">
+      </a>
+      <a href="#" data-shutter-title="The Hulk">
+        <img src="__PUBLIC__/index/picture/shutter_3.jpg" alt="#">
+      </a>
+      <a href="#" data-shutter-title="The your">
+        <img src="__PUBLIC__/index/picture/shutter_4.jpg" alt="#">
+      </a>
+    </div>
+    <ul class="shutter-btn">
+      <li class="prev"></li>
+      <li class="next"></li>
+    </ul>
+    <div class="shutter-desc">
+      <p>Iron Man</p>
+    </div>
+    <script src="__PUBLIC__/index/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/index/js/velocity.js"></script>
+    <script src="__PUBLIC__/index/js/shutter.js"></script>
+    <script>
+      $(function () {
+        $('.shutter').shutter({
+        shutterW: 1100, // 容器宽度
+        shutterH: 360, // 容器高度
+        isAutoPlay: true, // 是否自动播放
+        playInterval: 5000, // 自动播放时间
+        curDisplay: 3, // 当前显示页
+        fullPage: false // 是否全屏展示
+        });
+      });
+    </script>
+  </div>
+  <div class="blank"></div>
+  <div class="leftbox">
+    <div class="tuijian">
+      <h2 class="hometitle">每日一说(备忘录)</h2>
+      <div class="notice">
+        <h3>【今日焦点】博客正式上线</h3>
+        <span class="notice_val">
+        大家好,欢迎关顾小弟的个人博客，本博客上线与2018年*月*日。目的是记录自己在学习编程过程中遇到的一些问题，以及详细的解决方案，给予后人一个免费的参考。本人菜鸟一个，所以文章仅供参考哦！</span>
+        <span class="notice_time">2018年4月2日</span>
+      </div>
+    </div>
+    <div class="newblogs">
+      <h2 class="hometitle">最新文章</h2>
+      <ul id="list" style="display: none;">
+        {volist name="articleList" id="articleItem"}
+        <li>
+          <h3 class="blogtitle"><a href="{:url('shareinfo/index',['id'=>$articleItem.id],'html',true)}" target="_blank" >{$articleItem.title}</a></h3>
+          <div class="bloginfo"><span class="blogpic"><a href="/" title=""><img src="__PUBLIC__/index/images/t01.jpg"  /></a></span>
+            <p>{$articleItem.descibe}</p>
+          </div>
+          <div class="autor"><span class="lm f_l"><a href="/">{$articleItem.owner}</a></span><span class="dtime f_l">{$articleItem.time|date='Y-m-d',###}</span><span class="viewnum f_l">浏览（<a href="/">{$articleItem.hits}</a>）</span><span class="pingl f_l">喜欢（<a href="/">30</a>）</span><span class="f_r"><a href="{:url('Shareinfo/index',['id'=>$articleItem.id],'html',true)}" class="more">阅读原文</a></span></div>
+        </li>
+        {/volist}
+      </ul>
+      <ul id="list2">
+      </ul>
+      <script src="__PUBLIC__/index/js/page2.js"></script>
+    </div>
+  </div>
+  <div class="rightbox">
+    <div class="aboutme">
+      <h2 class="ab_title">关于我</h2>
+      <div class="avatar"><img src="__PUBLIC__/index/images/b04.jpg" /></div>
+      <div class="ab_con">
+        <p>网名：EchoBao | 隔壁家邻居黄叔叔</p>
+        <p>职业：Web前端设计师、网页设计 </p>
+        <p>籍贯：四川省―成都市</p>
+        <p>邮箱：dancesmiling@qq.com</p>
+      </div>
+    </div>
+    <div class="blank"></div>
+    <div class="search">
+      <form action="/e/search/index.php" method="post" name="searchform" id="searchform">
+        <input name="keyboard" id="keyboard" class="input_text" value="请输入关键字" style="color: rgb(153, 153, 153);" onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#999';value='请输入关键字'}" type="text">
+        <input name="show" value="title" type="hidden">
+        <input name="tempid" value="1" type="hidden">
+        <input name="tbname" value="news" type="hidden">
+        <input name="Submit" class="input_submit" value="搜索" type="submit">
+      </form>
+    </div>
+    <div class="paihang">
+      <h2 class="ab_title"><a href="/">点击排行</a></h2>
+      <ul>
+        {volist name="articleHot" id="ArtHotItem"}
+        <li><b><a href="{:url('Shareinfo/index',['id'=>$ArtHotItem.id],'html',true)}" target="_blank">{$ArtHotItem.title}</a></b>
+          <p><i><img src="__PUBLIC__/index/images/b01.png"></i>{$ArtHotItem.descibe|mb_substr=0,30,'utf-8'}...</p>
+        </li>
+        {/volist}
+      </ul>
+    </div>
+    <div class="links">
+      <h2 class="ab_title">友情链接</h2>
+      <p>
+        他们同样是一群网虫，却不是每天泡在网上游走在淘宝和网游之间、刷着本来就快要透支的信用卡。他们或许没有踏出国门一步，却获得了斯坦福、哈佛等许多常青藤名校课程的结业证……他们的同学不局限在一国一校，而是遍及全球……加入他们，成为一名互联网学习者！
+      </p>
+      <ul>
+        {volist name="linkList" id="linkItem"}
+        <li><a href="{$linkItem.link}" target="_blank">{$linkItem.name}</a></li>
+        {/volist}
+      </ul>
+    </div>
+    <div class="weixin">
+      <h2 class="ab_title">微信关注</h2>
+      <ul>
+        <img src="__PUBLIC__/index/images/wx.jpg">
+      </ul>
+    </div>
+  </div>
+</article>
+{include file="public/footer" /}
+</body>
+</html>

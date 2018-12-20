@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+{php}$controller = request()->controller();{/php}
+{if condition="$controller eq 'Index'" }
+  <title>首页 - {$web.WebName}</title>
+  <meta name="keywords" content="{$web.keyword}" />
+  <meta name="description" content="{$web.description}" />
+{else /}
+  <title>{$articleInfo.title} - {$web.WebName}</title>
+  <meta name="keywords" content="{$web.keyword}" />
+  <meta name="description" content="{$controller}" />
+{/if}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="__PUBLIC__/index/css/base.css" rel="stylesheet">
+<link href="__PUBLIC__/index/css/index.css" rel="stylesheet">
+<link href="__PUBLIC__/index/css/m.css" rel="stylesheet">
+<!--[if lt IE 9]>
+<script src="__PUBLIC__/index/js/modernizr.js"></script>
+<![endif]-->
+<script src="__PUBLIC__/index/js/page.js"></script>
+</head>
+<body>
+<header>
+  <div id="mnav">
+    <div class="logo"><a href="/">EchoBao个人博客</a></div>
+    <h2 id="mnavh"><span class="navicon"></span></h2>
+    <ul id="starlist">
+      <li><a href="index.html">网站首页</a></li>
+      {volist name="web.cates" id="cateItem"}
+      <li><a href="about.html">{$cateItem.catename}</a></li>
+      {/volist}
+     <!--
+      <li><a href="share.html">模板分享</a></li>
+      <li><a href="list.html">学无止境</a></li>
+      <li><a href="info.html">慢生活</a></li>
+      <li><a href="shareinfo.html">模板内容页</a></li>
+      <li><a href="gbook.html">留言</a></li>
+    -->
+    </ul>
+  </div>
+  <script>
+window.onload = function ()
+{
+	var oH2 = document.getElementById("mnavh");
+	var oUl = document.getElementById("starlist");
+	oH2.onclick = function ()
+	{
+		var style = oUl.style;
+		style.display = style.display == "block" ? "none" : "block";
+		oH2.className = style.display == "block" ? "open" : ""
+	}
+}
+</script>
+</header>
+<div class="line46"></div>
