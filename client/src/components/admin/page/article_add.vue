@@ -3,12 +3,12 @@
         <el-form ref="form" :model="article" label-width="100px">
             <el-form-item label="标题：">
                 <el-col :span="5">
-                    <el-input :model="article.title"></el-input>
+                    <el-input v-model="article.title"></el-input>
                 </el-col>
             </el-form-item>
              <el-form-item label="栏目：">
                 <el-col :span="7">
-                    <el-select v-model="menuItem" placeholder="请选择">
+                    <el-select v-model="article.category_id" placeholder="请选择">
                         <el-option v-for="item in menus" :key="item.value" :label="item.label" :value="item.value">
                         </el-option>
                     </el-select>
@@ -16,12 +16,12 @@
             </el-form-item>
             <el-form-item label="作者：">
                 <el-col :span="3">
-                    <el-input :model="article.author"></el-input>
+                    <el-input v-model="article.author"></el-input>
                 </el-col>
             </el-form-item>
             <el-form-item label="关键字：">
                 <el-col :span="5">
-                    <el-input :model="article.author"></el-input>
+                    <el-input v-model="article.keywords"></el-input>
                 </el-col>
             </el-form-item>
             <el-form-item label="封面：" style="margin-top:18px;">
@@ -32,38 +32,38 @@
             </el-form-item>
             <el-form-item label="摘要：">
                 <el-col :span="10">
-                    <el-input class="comment-textare" type="textarea" resize="none" :rows="7" placeholder="请输入内容" :model="article.abstract"></el-input>
+                    <el-input class="comment-textare" type="textarea" resize="none" :rows="7" placeholder="请输入内容" v-model="article.description"></el-input>
                 </el-col>
             </el-form-item>
             <el-row type="flex" justify="center">
                 <el-col :span="22">
-                    <mavon-editor :subfield="false" :ishljs="true" :model="article.content" style="min-height:500px;"></mavon-editor>
+                    <mavon-editor :subfield="false" :ishljs="true" v-model="article.content" style="min-height:500px;"></mavon-editor>
                 </el-col>
             </el-row>
-            <el-button type="primary" style="margin-top:20px;float:right">发布</el-button>
+            <el-button type="primary" @click="Submission" style="margin-top:20px;float:right">发布</el-button>
         </el-form>
     </div>
 </template>
 <script>
-    import {mavonEditor} from 'mavon-editor'
-    import 'mavon-editor/dist/css/index.css'
+    import {mavonEditor} from 'mavon-editor';
+    import 'mavon-editor/dist/css/index.css';
+    import {articleAction} from '../../../api/index.js';
 
     export default {
-        data() {
-            return {
-                article: {title:'',author:'',content:'',cover:'',abstract:''},
-                menus:[
-                    {value: '选项1',label: '黄金糕'},
-                    {value: '选项2',label: '双皮奶'},
-                    {value: '选项3',label: '蚵仔煎'},
-                    {value: '选项4',label: '龙须面'},
-                    {value: '选项5',label: '北京烤鸭'}
-                ],
-                menuItem:''
-            }
-        },
         components:{
             mavonEditor
+        },
+        data() {
+            return {
+                article: {title:'',category_id:'',author:'',keywords:'',content:'',cover:'ssssss',description:''},
+                menus:[
+                    {value: '1',label: '黄金糕'},
+                    {value: '2',label: '双皮奶'},
+                    {value: '3',label: '蚵仔煎'},
+                    {value: '4',label: '龙须面'},
+                    {value: '5',label: '北京烤鸭'}
+                ],
+            }
         },
         methods:{
             handleAvatarSuccess(res, file) {
@@ -80,6 +80,11 @@
                 this.$message.error('上传头像图片大小不能超过 2MB!');
                 }
                 return isJPG && isLt2M;
+            },
+            Submission(){
+                articleAction.add(this.article).then(res => {
+
+                })
             }
         }
     }

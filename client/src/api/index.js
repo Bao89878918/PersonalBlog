@@ -10,6 +10,16 @@ const userAction = {
     }
 };
 
+const articleAction = {
+    add: (param) => {
+        return request({
+            url: '/api/article/add',
+            method: 'post',
+            params: param
+        })
+    }
+};
+
 const utils = {
     getMusicList : (param) => {
         return request({
@@ -21,5 +31,5 @@ const utils = {
 }
 
 export {
-    userAction,utils
+    userAction, utils, articleAction
 }
